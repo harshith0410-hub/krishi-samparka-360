@@ -18,6 +18,7 @@ const COLORS: Record<PoiType, string> = {
   warehouse: "#2563eb",
   coldStorage: "#0891b2",
   equipment: "#ea8317",
+  labor: "#0f766e",
   transport: "#7c3aed",
   buyer: "#be185d",
   office: "#475569",

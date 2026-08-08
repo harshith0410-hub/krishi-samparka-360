@@ -57,6 +57,7 @@ function MarketsPage() {
     warehouse: true,
     coldStorage: true,
     equipment: false,
+    labor: false,
     transport: false,
     buyer: true,
     office: false,
