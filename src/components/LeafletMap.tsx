@@ -33,7 +33,7 @@ export default function LeafletMap({
   height?: number;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<LeafletMap | null>(null);
+  const mapRef = useRef<LMap | null>(null);
   const layerRef = useRef<LayerGroup | null>(null);
   const { t, lang } = useI18n();
 
