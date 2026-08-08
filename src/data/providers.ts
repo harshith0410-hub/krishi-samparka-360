@@ -77,7 +77,13 @@ export const providers: Provider[] = [
   p("by2", "buyer", "Nandini Agro Exports", "ನಂದಿನಿ ಅಗ್ರೋ ಎಕ್ಸ್‌ಪೋರ್ಟ್ಸ್", "Bengaluru", "ಬೆಂಗಳೂರು", 13.02, 77.55, "Buying grapes, pomegranate", "ದ್ರಾಕ್ಷಿ, ದಾಳಿಂಬೆ ಖರೀದಿ", 95, "kg", true, 4.7, "+91 90000 55002"),
   p("by3", "buyer", "Malnad Coffee Buyers", "ಮಲೆನಾಡು ಕಾಫಿ ಬಯರ್ಸ್", "Shivamogga", "ಶಿವಮೊಗ್ಗ", 13.93, 75.57, "Buying coffee, pepper", "ಕಾಫಿ, ಕರಿಮೆಣಸು ಖರೀದಿ", 330, "kg", true, 4.2, "+91 90000 55003"),
   p("by4", "buyer", "Hubballi Grain Mandi Buyer", "ಹುಬ್ಬಳ್ಳಿ ಧಾನ್ಯ ಖರೀದಿದಾರ", "Dharwad", "ಧಾರವಾಡ", 15.36, 75.13, "Buying jowar, maize", "ಜೋಳ, ಮೆಕ್ಕೆಜೋಳ ಖರೀದಿ", 29, "kg", true, 4.0, "+91 90000 55004"),
+  // Labour groups
+  p("lb1", "labor", "Kaveri Labour Group (12 workers)", "ಕಾವೇರಿ ಕಾರ್ಮಿಕ ತಂಡ (12 ಜನ)", "Mandya", "ಮಂಡ್ಯ", 12.51, 76.88, "Harvesting, weeding, transplanting", "ಕೊಯ್ಲು, ಕಳೆ ತೆಗೆಯುವುದು, ನಾಟಿ", 550, "day", true, 4.5, "+91 90000 12001"),
+  p("lb2", "labor", "Shivamogga Harvest Team (8 workers)", "ಶಿವಮೊಗ್ಗ ಕೊಯ್ಲು ತಂಡ (8 ಜನ)", "Shivamogga", "ಶಿವಮೊಗ್ಗ", 13.93, 75.57, "Paddy harvesting and loading", "ಭತ್ತ ಕೊಯ್ಲು ಮತ್ತು ಲೋಡಿಂಗ್", 600, "day", true, 4.3, "+91 90000 12002"),
+  p("lb3", "labor", "Belagavi Sugarcane Cutters (15 workers)", "ಬೆಳಗಾವಿ ಕಬ್ಬು ಕಟಾವು ತಂಡ (15 ಜನ)", "Belagavi", "ಬೆಳಗಾವಿ", 15.85, 74.5, "Sugarcane cutting and bundling", "ಕಬ್ಬು ಕಟಾವು ಮತ್ತು ಕಟ್ಟುವುದು", 700, "day", false, 4.6, "+91 90000 12003"),
+  p("lb4", "labor", "Kolar Horticulture Crew (10 workers)", "ಕೋಲಾರ ತೋಟಗಾರಿಕೆ ತಂಡ (10 ಜನ)", "Kolar", "ಕೋಲಾರ", 13.14, 78.13, "Tomato picking, grading, packing", "ಟೊಮೇಟೊ ಕೀಳುವುದು, ವಿಂಗಡಣೆ, ಪ್ಯಾಕಿಂಗ್", 520, "day", true, 4.4, "+91 90000 12004"),
 ];
+
 
 export type Scheme = {
   id: string;
