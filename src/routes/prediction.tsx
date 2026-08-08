@@ -228,7 +228,7 @@ function PredictionPage() {
           <CardContent className="space-y-1">
             <p className="text-lg font-semibold">
               {p.trend === "rising"
-                ? `${Math.max(1, Math.round(p.windowDays * 0.6))}–${p.windowDays} ${t("common.days")}`
+                ? `${Math.max(1, Math.round(p.windowDays * 0.6))}–${p.windowDays} ${t("predict.p7").replace(/[0-9]+ /, "")}`
                 : t("predict.p1")}
             </p>
             <p className="text-sm text-muted-foreground">{t("predict.disclaimer")}</p>
