@@ -104,6 +104,7 @@ export type PoiType =
   | "warehouse"
   | "coldStorage"
   | "equipment"
+  | "labor"
   | "transport"
   | "buyer"
   | "office";
