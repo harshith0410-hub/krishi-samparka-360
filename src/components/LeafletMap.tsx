@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import type { Map as LeafletMap, LayerGroup } from "leaflet";
+import type { Map as LMap, LayerGroup } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { PoiType } from "@/data/agri";
