@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as MarketsRouteImport } from './routes/markets'
 import { Route as PredictionRouteImport } from './routes/prediction'
 import { Route as PricesRouteImport } from './routes/prices'
+import { Route as SchemesRouteImport } from './routes/schemes'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as WeatherRouteImport } from './routes/weather'
 
@@ -36,6 +37,11 @@ const PricesRoute = PricesRouteImport.update({
   path: '/prices',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SchemesRoute = SchemesRouteImport.update({
+  id: '/schemes',
+  path: '/schemes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
+  '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
   '/weather': typeof WeatherRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
+  '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
   '/weather': typeof WeatherRoute
 }
@@ -69,21 +77,36 @@ export interface FileRoutesById {
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
+  '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
   '/weather': typeof WeatherRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/markets' | '/prediction' | '/prices' | '/services' | '/weather'
+    | '/'
+    | '/markets'
+    | '/prediction'
+    | '/prices'
+    | '/schemes'
+    | '/services'
+    | '/weather'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/markets' | '/prediction' | '/prices' | '/services' | '/weather'
+  to:
+    | '/'
+    | '/markets'
+    | '/prediction'
+    | '/prices'
+    | '/schemes'
+    | '/services'
+    | '/weather'
   id:
     | '__root__'
     | '/'
     | '/markets'
     | '/prediction'
     | '/prices'
+    | '/schemes'
     | '/services'
     | '/weather'
   fileRoutesById: FileRoutesById
@@ -93,6 +116,7 @@ export interface RootRouteChildren {
   MarketsRoute: typeof MarketsRoute
   PredictionRoute: typeof PredictionRoute
   PricesRoute: typeof PricesRoute
+  SchemesRoute: typeof SchemesRoute
   ServicesRoute: typeof ServicesRoute
   WeatherRoute: typeof WeatherRoute
 }
@@ -127,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/schemes': {
+      id: '/schemes'
+      path: '/schemes'
+      fullPath: '/schemes'
+      preLoaderRoute: typeof SchemesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -149,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   MarketsRoute: MarketsRoute,
   PredictionRoute: PredictionRoute,
   PricesRoute: PricesRoute,
+  SchemesRoute: SchemesRoute,
   ServicesRoute: ServicesRoute,
   WeatherRoute: WeatherRoute,
 }
