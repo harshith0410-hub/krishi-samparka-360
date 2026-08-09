@@ -10,22 +10,38 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AssistantRouteImport } from './routes/assistant'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as MarketsRouteImport } from './routes/markets'
 import { Route as PredictionRouteImport } from './routes/prediction'
 import { Route as PricesRouteImport } from './routes/prices'
 import { Route as SchemesRouteImport } from './routes/schemes'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as WeatherRouteImport } from './routes/weather'
+import { Route as AuthenticatedMyEquipmentRouteImport } from './routes/_authenticated/my-equipment'
+import { Route as AuthenticatedMyRentalsRouteImport } from './routes/_authenticated/my-rentals'
+import { Route as EquipmentIndexRouteImport } from './routes/equipment/index'
+import { Route as EquipmentIdRouteImport } from './routes/equipment/$id'
+import { Route as AuthenticatedEquipmentNewRouteImport } from './routes/_authenticated/equipment.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AssistantRoute = AssistantRouteImport.update({
   id: '/assistant',
   path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketsRoute = MarketsRouteImport.update({
@@ -58,80 +74,149 @@ const WeatherRoute = WeatherRouteImport.update({
   path: '/weather',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedMyEquipmentRoute =
+  AuthenticatedMyEquipmentRouteImport.update({
+    id: '/my-equipment',
+    path: '/my-equipment',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMyRentalsRoute = AuthenticatedMyRentalsRouteImport.update({
+  id: '/my-rentals',
+  path: '/my-rentals',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const EquipmentIndexRoute = EquipmentIndexRouteImport.update({
+  id: '/equipment/',
+  path: '/equipment/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipmentIdRoute = EquipmentIdRouteImport.update({
+  id: '/equipment/$id',
+  path: '/equipment/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedEquipmentNewRoute =
+  AuthenticatedEquipmentNewRouteImport.update({
+    id: '/equipment/new',
+    path: '/equipment/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/auth': typeof AuthRoute
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
   '/weather': typeof WeatherRoute
+  '/my-equipment': typeof AuthenticatedMyEquipmentRoute
+  '/my-rentals': typeof AuthenticatedMyRentalsRoute
+  '/equipment/$id': typeof EquipmentIdRoute
+  '/equipment/': typeof EquipmentIndexRoute
+  '/equipment/new': typeof AuthenticatedEquipmentNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/auth': typeof AuthRoute
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
   '/weather': typeof WeatherRoute
+  '/my-equipment': typeof AuthenticatedMyEquipmentRoute
+  '/my-rentals': typeof AuthenticatedMyRentalsRoute
+  '/equipment/$id': typeof EquipmentIdRoute
+  '/equipment': typeof EquipmentIndexRoute
+  '/equipment/new': typeof AuthenticatedEquipmentNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/assistant': typeof AssistantRoute
+  '/auth': typeof AuthRoute
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
   '/weather': typeof WeatherRoute
+  '/_authenticated/my-equipment': typeof AuthenticatedMyEquipmentRoute
+  '/_authenticated/my-rentals': typeof AuthenticatedMyRentalsRoute
+  '/equipment/$id': typeof EquipmentIdRoute
+  '/equipment/': typeof EquipmentIndexRoute
+  '/_authenticated/equipment/new': typeof AuthenticatedEquipmentNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/assistant'
+    | '/auth'
     | '/markets'
     | '/prediction'
     | '/prices'
     | '/schemes'
     | '/services'
     | '/weather'
+    | '/my-equipment'
+    | '/my-rentals'
+    | '/equipment/$id'
+    | '/equipment/'
+    | '/equipment/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/assistant'
+    | '/auth'
     | '/markets'
     | '/prediction'
     | '/prices'
     | '/schemes'
     | '/services'
     | '/weather'
+    | '/my-equipment'
+    | '/my-rentals'
+    | '/equipment/$id'
+    | '/equipment'
+    | '/equipment/new'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/assistant'
+    | '/auth'
     | '/markets'
     | '/prediction'
     | '/prices'
     | '/schemes'
     | '/services'
     | '/weather'
+    | '/_authenticated/my-equipment'
+    | '/_authenticated/my-rentals'
+    | '/equipment/$id'
+    | '/equipment/'
+    | '/_authenticated/equipment/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AssistantRoute: typeof AssistantRoute
+  AuthRoute: typeof AuthRoute
   MarketsRoute: typeof MarketsRoute
   PredictionRoute: typeof PredictionRoute
   PricesRoute: typeof PricesRoute
   SchemesRoute: typeof SchemesRoute
   ServicesRoute: typeof ServicesRoute
   WeatherRoute: typeof WeatherRoute
+  EquipmentIdRoute: typeof EquipmentIdRoute
+  EquipmentIndexRoute: typeof EquipmentIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -143,11 +228,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/assistant': {
       id: '/assistant'
       path: '/assistant'
       fullPath: '/assistant'
       preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/markets': {
@@ -192,18 +291,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WeatherRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/my-equipment': {
+      id: '/_authenticated/my-equipment'
+      path: '/my-equipment'
+      fullPath: '/my-equipment'
+      preLoaderRoute: typeof AuthenticatedMyEquipmentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/my-rentals': {
+      id: '/_authenticated/my-rentals'
+      path: '/my-rentals'
+      fullPath: '/my-rentals'
+      preLoaderRoute: typeof AuthenticatedMyRentalsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/equipment/': {
+      id: '/equipment/'
+      path: '/equipment'
+      fullPath: '/equipment/'
+      preLoaderRoute: typeof EquipmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipment/$id': {
+      id: '/equipment/$id'
+      path: '/equipment/$id'
+      fullPath: '/equipment/$id'
+      preLoaderRoute: typeof EquipmentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/equipment/new': {
+      id: '/_authenticated/equipment/new'
+      path: '/equipment/new'
+      fullPath: '/equipment/new'
+      preLoaderRoute: typeof AuthenticatedEquipmentNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedMyEquipmentRoute: typeof AuthenticatedMyEquipmentRoute
+  AuthenticatedMyRentalsRoute: typeof AuthenticatedMyRentalsRoute
+  AuthenticatedEquipmentNewRoute: typeof AuthenticatedEquipmentNewRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedMyEquipmentRoute: AuthenticatedMyEquipmentRoute,
+  AuthenticatedMyRentalsRoute: AuthenticatedMyRentalsRoute,
+  AuthenticatedEquipmentNewRoute: AuthenticatedEquipmentNewRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AssistantRoute: AssistantRoute,
+  AuthRoute: AuthRoute,
   MarketsRoute: MarketsRoute,
   PredictionRoute: PredictionRoute,
   PricesRoute: PricesRoute,
   SchemesRoute: SchemesRoute,
   ServicesRoute: ServicesRoute,
   WeatherRoute: WeatherRoute,
+  EquipmentIdRoute: EquipmentIdRoute,
+  EquipmentIndexRoute: EquipmentIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
