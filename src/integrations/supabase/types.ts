@@ -14,7 +14,393 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      equipment: {
+        Row: {
+          brand: string | null
+          category: string
+          condition: string
+          created_at: string
+          delivery_available: boolean
+          delivery_fee: number
+          description: string | null
+          district: string
+          fuel_included: boolean
+          half_day_price: number
+          id: string
+          latitude: number
+          longitude: number
+          maintenance_included: boolean
+          manufacturing_year: number | null
+          model: string | null
+          name: string
+          operator_available: boolean
+          operator_fee: number
+          owner_id: string
+          pickup_available: boolean
+          pin_code: string | null
+          price_per_day: number
+          price_per_hour: number
+          security_deposit: number
+          state: string
+          status: string
+          taluk: string | null
+          updated_at: string
+          village: string | null
+        }
+        Insert: {
+          brand?: string | null
+          category: string
+          condition?: string
+          created_at?: string
+          delivery_available?: boolean
+          delivery_fee?: number
+          description?: string | null
+          district?: string
+          fuel_included?: boolean
+          half_day_price?: number
+          id?: string
+          latitude: number
+          longitude: number
+          maintenance_included?: boolean
+          manufacturing_year?: number | null
+          model?: string | null
+          name: string
+          operator_available?: boolean
+          operator_fee?: number
+          owner_id: string
+          pickup_available?: boolean
+          pin_code?: string | null
+          price_per_day?: number
+          price_per_hour?: number
+          security_deposit?: number
+          state?: string
+          status?: string
+          taluk?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Update: {
+          brand?: string | null
+          category?: string
+          condition?: string
+          created_at?: string
+          delivery_available?: boolean
+          delivery_fee?: number
+          description?: string | null
+          district?: string
+          fuel_included?: boolean
+          half_day_price?: number
+          id?: string
+          latitude?: number
+          longitude?: number
+          maintenance_included?: boolean
+          manufacturing_year?: number | null
+          model?: string | null
+          name?: string
+          operator_available?: boolean
+          operator_fee?: number
+          owner_id?: string
+          pickup_available?: boolean
+          pin_code?: string | null
+          price_per_day?: number
+          price_per_hour?: number
+          security_deposit?: number
+          state?: string
+          status?: string
+          taluk?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Relationships: []
+      }
+      equipment_availability: {
+        Row: {
+          booking_id: string | null
+          created_at: string
+          date: string
+          end_time: string
+          equipment_id: string
+          id: string
+          start_time: string
+          status: string
+        }
+        Insert: {
+          booking_id?: string | null
+          created_at?: string
+          date: string
+          end_time: string
+          equipment_id: string
+          id?: string
+          start_time: string
+          status?: string
+        }
+        Update: {
+          booking_id?: string | null
+          created_at?: string
+          date?: string
+          end_time?: string
+          equipment_id?: string
+          id?: string
+          start_time?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "equipment_availability_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      equipment_bookings: {
+        Row: {
+          booking_date: string
+          created_at: string
+          delivery_fee: number
+          duration_hours: number
+          end_time: string
+          equipment_id: string
+          farmer_id: string
+          hourly_rate: number
+          id: string
+          need_delivery: boolean
+          need_operator: boolean
+          notes: string | null
+          operator_fee: number
+          owner_id: string
+          rental_amount: number
+          security_deposit: number
+          start_time: string
+          status: string
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          booking_date: string
+          created_at?: string
+          delivery_fee?: number
+          duration_hours: number
+          end_time: string
+          equipment_id: string
+          farmer_id: string
+          hourly_rate?: number
+          id?: string
+          need_delivery?: boolean
+          need_operator?: boolean
+          notes?: string | null
+          operator_fee?: number
+          owner_id: string
+          rental_amount?: number
+          security_deposit?: number
+          start_time: string
+          status?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          booking_date?: string
+          created_at?: string
+          delivery_fee?: number
+          duration_hours?: number
+          end_time?: string
+          equipment_id?: string
+          farmer_id?: string
+          hourly_rate?: number
+          id?: string
+          need_delivery?: boolean
+          need_operator?: boolean
+          notes?: string | null
+          operator_fee?: number
+          owner_id?: string
+          rental_amount?: number
+          security_deposit?: number
+          start_time?: string
+          status?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "equipment_bookings_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      equipment_images: {
+        Row: {
+          created_at: string
+          equipment_id: string
+          id: string
+          label: string
+          sort_order: number
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          equipment_id: string
+          id?: string
+          label?: string
+          sort_order?: number
+          url: string
+        }
+        Update: {
+          created_at?: string
+          equipment_id?: string
+          id?: string
+          label?: string
+          sort_order?: number
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "equipment_images_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      equipment_reviews: {
+        Row: {
+          booking_id: string
+          comment: string | null
+          created_at: string
+          equipment_id: string
+          equipment_rating: number | null
+          id: string
+          owner_rating: number | null
+          reviewer_id: string
+          reviewer_role: string
+          service_rating: number | null
+        }
+        Insert: {
+          booking_id: string
+          comment?: string | null
+          created_at?: string
+          equipment_id: string
+          equipment_rating?: number | null
+          id?: string
+          owner_rating?: number | null
+          reviewer_id: string
+          reviewer_role?: string
+          service_rating?: number | null
+        }
+        Update: {
+          booking_id?: string
+          comment?: string | null
+          created_at?: string
+          equipment_id?: string
+          equipment_rating?: number | null
+          id?: string
+          owner_rating?: number | null
+          reviewer_id?: string
+          reviewer_role?: string
+          service_rating?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "equipment_reviews_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "equipment_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "equipment_reviews_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          body_en: string
+          body_kn: string
+          booking_id: string | null
+          created_at: string
+          id: string
+          read: boolean
+          title_en: string
+          title_kn: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          body_en?: string
+          body_kn?: string
+          booking_id?: string | null
+          created_at?: string
+          id?: string
+          read?: boolean
+          title_en: string
+          title_kn: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          body_en?: string
+          body_kn?: string
+          booking_id?: string | null
+          created_at?: string
+          id?: string
+          read?: boolean
+          title_en?: string
+          title_kn?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          district: string | null
+          email: string | null
+          full_name: string
+          id: string
+          phone: string
+          pin_code: string | null
+          rating: number
+          taluk: string | null
+          updated_at: string
+          village: string | null
+        }
+        Insert: {
+          created_at?: string
+          district?: string | null
+          email?: string | null
+          full_name?: string
+          id: string
+          phone?: string
+          pin_code?: string | null
+          rating?: number
+          taluk?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Update: {
+          created_at?: string
+          district?: string | null
+          email?: string | null
+          full_name?: string
+          id?: string
+          phone?: string
+          pin_code?: string | null
+          rating?: number
+          taluk?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
