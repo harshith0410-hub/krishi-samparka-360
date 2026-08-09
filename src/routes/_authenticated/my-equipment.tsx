@@ -71,7 +71,7 @@ function MyEquipmentPage() {
 
   async function setStatus(id: string, status: "ACTIVE" | "PAUSED" | "ARCHIVED") {
     const { error } = await supabase.from("equipment").update({ status }).eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(status === "ARCHIVED" ? t("eq.removed") : t("eq.saved"));
     qc.invalidateQueries({ queryKey: ["equipment"] });
   }
@@ -247,7 +247,7 @@ function AvailabilityEditor({ equipmentId }: { equipmentId: string }) {
       end_time: hhmm(to),
       status,
     });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["availability", equipmentId, date] });
   }
 

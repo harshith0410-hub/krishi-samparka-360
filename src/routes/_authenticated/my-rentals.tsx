@@ -61,7 +61,7 @@ function MyRentalsPage() {
 
   async function cancel(id: string) {
     const { error } = await supabase.from("equipment_bookings").update({ status: "CANCELLED" }).eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(t("eq.saved"));
     qc.invalidateQueries({ queryKey: ["bookings"] });
   }
@@ -141,7 +141,7 @@ function ReviewForm({ booking, userId }: { booking: BookingRow; userId: string |
       owner_rating: Number(ownerRating),
       service_rating: Number(serviceRating),
     });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setDone(true);
     toast.success(t("eq.reviewThanks"));
   }
