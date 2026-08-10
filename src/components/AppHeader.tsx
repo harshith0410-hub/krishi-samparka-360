@@ -13,6 +13,8 @@ const NAV: { to: string; key: TranslationKey }[] = [
   { to: "/prediction", key: "nav.prediction" },
   { to: "/weather", key: "nav.weather" },
   { to: "/services", key: "nav.services" },
+  { to: "/equipment", key: "eq.title" },
+
   { to: "/schemes", key: "nav.schemes" },
   { to: "/assistant", key: "nav.assistant" },
 ];
