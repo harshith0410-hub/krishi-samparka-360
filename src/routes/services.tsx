@@ -50,6 +50,17 @@ function ServicesPage() {
       <DemoBadge />
       <LocationPicker loc={loc} compact />
 
+      <Card className="border-primary/30 bg-secondary/40">
+        <CardContent className="flex flex-col gap-3 pt-6 sm:flex-row">
+          <Button asChild size="lg" className="flex-1">
+            <Link to="/equipment">🚜 {t("eq.rent")}</Link>
+          </Button>
+          <Button asChild size="lg" variant="secondary" className="flex-1 border border-primary/40">
+            <Link to="/equipment/new">🏷️ {t("eq.rentOut")}</Link>
+          </Button>
+        </CardContent>
+      </Card>
+
       <Tabs defaultValue="equipment">
         <TabsList className="flex-wrap">
           {TABS.map((tab) => (
@@ -58,6 +69,7 @@ function ServicesPage() {
             </TabsTrigger>
           ))}
         </TabsList>
+
         {TABS.map((tab) => (
           <TabsContent key={tab.type} value={tab.type} className="mt-4">
             <ProviderList type={tab.type} origin={loc.location} />
