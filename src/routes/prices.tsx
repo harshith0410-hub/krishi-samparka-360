@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { TrendingDown, TrendingUp, Minus } from "lucide-react";
 import {
   Area,
@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import { useI18n, formatCurrency } from "@/i18n/I18nProvider";
 import { useFarmLocation } from "@/hooks/useFarmLocation";
-import { DemoBadge, EmptyState, PageHeader } from "@/components/Chrome";
+import { EmptyState, PageHeader } from "@/components/Chrome";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,7 +24,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { crops, markets, type CropCategory } from "@/data/agri";
-import { priceFor, priceHistory, arrivalsFor } from "@/services/agriService";
+import { 
+  priceFor, 
+  priceHistory, 
+  arrivalsFor, 
+  fetchLiveMandiPrices, 
+  type MandiRecord 
+} from "@/services/agriService";
 
 export const Route = createFileRoute("/prices")({
   head: () => ({
@@ -55,6 +61,31 @@ function PricesPage() {
   const [category, setCategory] = useState<CropCategory | "all">("all");
   const [marketId, setMarketId] = useState(loc.location.districtId);
   const [selected, setSelected] = useState("tomato");
+
+  // State for Live Mandi API Data
+  const [liveMandiData, setLiveMandiData] = useState<MandiRecord[]>([]);
+  const [isLoadingLive, setIsLoadingLive] = useState<boolean>(true);
+
+  // Fetch Live Mandi Data on Mount
+  useEffect(() => {
+    async function loadLiveMandiPrices() {
+      try {
+  setIsLoadingLive(true);
+  const [onions, tomatoes, potatoes] = await Promise.all([
+    fetchLiveMandiPrices("Karnataka", "Onion"),
+    fetchLiveMandiPrices("Karnataka", "Tomato"),
+    fetchLiveMandiPrices("Karnataka", "Potato"),
+  ]);
+  setLiveMandiData([...onions, ...tomatoes, ...potatoes]);
+} catch (error) {
+  console.error("Failed to fetch live mandi prices:", error);
+} finally {
+  setIsLoadingLive(false);
+}
+    }
+
+    loadLiveMandiPrices();
+  }, []);
 
   const list = useMemo(
     () =>
@@ -100,7 +131,46 @@ function PricesPage() {
   return (
     <div className="mx-auto max-w-7xl space-y-6 px-4 py-10">
       <PageHeader title={t("prices.title")} subtitle={t("prices.subtitle")} />
-      <DemoBadge />
+      
+      {/* Live Data Section */}
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-soft space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold">🌾 Live Government APMC Mandi Rates</h2>
+          <span className="px-3 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900/40 dark:text-green-300">
+            ● Live Data.gov.in Feed
+          </span>
+        </div>
+
+        {isLoadingLive ? (
+          <p className="text-sm text-muted-foreground">Fetching real-time market rates...</p>
+        ) : liveMandiData.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No live mandi records found for current filter.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {liveMandiData.map((item, index) => (
+              <Card key={index} className="border-border">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base font-semibold">
+                    {item.market} ({item.district})
+                  </CardTitle>
+                  <p className="text-xs text-muted-foreground">
+                    Commodity: {item.commodity} | Date: {item.arrival_date}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-between text-sm">
+                    <span>Min: <strong>₹{item.min_price}</strong></span>
+                    <span>Max: <strong>₹{item.max_price}</strong></span>
+                    <span>Modal: <strong className="text-green-600 dark:text-green-400">₹{item.modal_price}</strong></span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+
+      
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">

@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as LiveDataRouteImport } from './routes/live-data'
 import { Route as MarketsRouteImport } from './routes/markets'
 import { Route as PredictionRouteImport } from './routes/prediction'
 import { Route as PricesRouteImport } from './routes/prices'
@@ -42,6 +43,11 @@ const AssistantRoute = AssistantRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveDataRoute = LiveDataRouteImport.update({
+  id: '/live-data',
+  path: '/live-data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketsRoute = MarketsRouteImport.update({
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
   '/auth': typeof AuthRoute
+  '/live-data': typeof LiveDataRoute
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
   '/auth': typeof AuthRoute
+  '/live-data': typeof LiveDataRoute
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/assistant': typeof AssistantRoute
   '/auth': typeof AuthRoute
+  '/live-data': typeof LiveDataRoute
   '/markets': typeof MarketsRoute
   '/prediction': typeof PredictionRoute
   '/prices': typeof PricesRoute
@@ -158,6 +167,7 @@ export interface FileRouteTypes {
     | '/'
     | '/assistant'
     | '/auth'
+    | '/live-data'
     | '/markets'
     | '/prediction'
     | '/prices'
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/'
     | '/assistant'
     | '/auth'
+    | '/live-data'
     | '/markets'
     | '/prediction'
     | '/prices'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/assistant'
     | '/auth'
+    | '/live-data'
     | '/markets'
     | '/prediction'
     | '/prices'
@@ -209,6 +221,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AssistantRoute: typeof AssistantRoute
   AuthRoute: typeof AuthRoute
+  LiveDataRoute: typeof LiveDataRoute
   MarketsRoute: typeof MarketsRoute
   PredictionRoute: typeof PredictionRoute
   PricesRoute: typeof PricesRoute
@@ -247,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live-data': {
+      id: '/live-data'
+      path: '/live-data'
+      fullPath: '/live-data'
+      preLoaderRoute: typeof LiveDataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/markets': {
@@ -349,6 +369,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AssistantRoute: AssistantRoute,
   AuthRoute: AuthRoute,
+  LiveDataRoute: LiveDataRoute,
   MarketsRoute: MarketsRoute,
   PredictionRoute: PredictionRoute,
   PricesRoute: PricesRoute,

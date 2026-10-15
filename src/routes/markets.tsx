@@ -4,7 +4,7 @@ import { Navigation, Search, Store } from "lucide-react";
 import { useI18n, formatCurrency } from "@/i18n/I18nProvider";
 import { useFarmLocation } from "@/hooks/useFarmLocation";
 import { LocationPicker } from "@/components/LocationPicker";
-import { DemoBadge, EmptyState, PageHeader } from "@/components/Chrome";
+import { EmptyState, PageHeader } from "@/components/Chrome";
 import { MapPanel, type MapPoint } from "@/components/MapPanel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -105,7 +105,7 @@ function MarketsPage() {
   return (
     <div className="mx-auto max-w-7xl space-y-6 px-4 py-10">
       <PageHeader title={t("markets.title")} subtitle={t("markets.subtitle")} />
-      <DemoBadge />
+      
 
       <Card>
         <CardContent className="space-y-4 pt-6">

@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import { useI18n, formatCurrency } from "@/i18n/I18nProvider";
 import { useFarmLocation } from "@/hooks/useFarmLocation";
-import { DemoBadge, PageHeader } from "@/components/Chrome";
+import { PageHeader } from "@/components/Chrome";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
@@ -76,7 +76,7 @@ function PredictionPage() {
   return (
     <div className="mx-auto max-w-7xl space-y-6 px-4 py-10">
       <PageHeader title={t("predict.title")} subtitle={t("predict.subtitle")} />
-      <DemoBadge />
+      
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">

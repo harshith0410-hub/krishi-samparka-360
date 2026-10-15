@@ -17,7 +17,7 @@ import {
 import { useI18n, formatCurrency } from "@/i18n/I18nProvider";
 import { useFarmLocation } from "@/hooks/useFarmLocation";
 import { LocationPicker } from "@/components/LocationPicker";
-import { DemoBadge } from "@/components/Chrome";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { crops } from "@/data/agri";
@@ -111,7 +111,7 @@ function Home() {
       </section>
 
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-12">
-        <DemoBadge />
+        
 
         <section aria-labelledby="quick">
           <h2 id="quick" className="mb-4 text-2xl font-bold">

@@ -310,3 +310,56 @@ export function getWeather(origin: { lat: number; lng: number }): WeatherData {
     alerts,
   };
 }
+// --- LIVE API INTEGRATIONS ---
+
+export interface LiveWeatherData {
+  name: string;
+  main: { temp: number; humidity: number };
+  weather: Array<{ description: string; icon: string }>;
+}
+
+export interface MandiRecord {
+  state: string;
+  district: string;
+  market: string;
+  commodity: string;
+  modal_price: string;
+  min_price: string;
+  max_price: string;
+  arrival_date: string;
+}
+
+// Fetch Live Weather Data (OpenWeatherMap)
+export async function fetchLiveWeather(city: string = "Bengaluru"): Promise<LiveWeatherData> {
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Weather API Error: ${response.statusText}`);
+  return await response.json();
+}
+
+// Fetch Live Mandi Prices (Data.gov.in)
+export async function fetchLiveMandiPrices(
+  stateName: string = "Karnataka",
+  commodity: string = ""
+): Promise<MandiRecord[]> {
+  const apiKey = import.meta.env.VITE_DATAGOV_API_KEY;
+  const resourceId = "9ef84268-d588-465a-a308-a864a43d0070";
+  
+  // Base URL with limit set to 50
+  let url = `https://api.data.gov.in/resource/${resourceId}?api-key=${apiKey}&format=json&limit=50`;
+
+  // Conditionally add state and commodity filters
+  if (stateName) {
+    url += `&filters[state]=${encodeURIComponent(stateName)}`;
+  }
+  if (commodity) {
+    url += `&filters[commodity]=${encodeURIComponent(commodity)}`;
+  }
+
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Data.gov.in API Error: ${response.statusText}`);
+  const data = await response.json();
+  return data.records || [];
+}
